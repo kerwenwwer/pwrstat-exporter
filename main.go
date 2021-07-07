@@ -31,9 +31,21 @@ var (
 		[]string{"device"},
 		nil)
 
-	UptimeDesc = prometheus.NewDesc(
-		"ups_uptime",
-		"UPS Uptime(min)",
+	RtimeDesc = prometheus.NewDesc(
+		"ups_remaining_runtime",
+		"UPS Remaining Runtime(min)",
+		[]string{"device"},
+		nil)
+
+	OutVoltageDesc = prometheus.NewDesc(
+		"ups_out_voltage",
+		"UPS Output Voltage(V): pass-> 1 non_pass -> 0",
+		[]string{"device"},
+		nil)
+
+	TestDesc = prometheus.NewDesc(
+		"ups_test_result",
+		"UPS Test Result",
 		[]string{"device"},
 		nil)
 )
@@ -50,7 +62,9 @@ func (l *PwrstatCollector) Describe(ch chan<- *prometheus.Desc) {
 	ch <- LoadDesc
 	ch <- StateDesc
 	ch <- BatteryDesc
-	ch <- UptimeDesc
+	ch <- RtimeDesc
+	ch <- OutVoltageDesc
+	ch <- TestDesc
 }
 
 func (l *PwrstatCollector) Collect(ch chan<- prometheus.Metric) {
@@ -82,8 +96,23 @@ func (l *PwrstatCollector) Collect(ch chan<- prometheus.Metric) {
 		} else if k == "Remaining Runtime" {
 			value_arr := strings.Fields(v)
 			if value, err := strconv.ParseFloat(value_arr[0], 64); err == nil {
-				ch <- prometheus.MustNewConstMetric(UptimeDesc,
+				ch <- prometheus.MustNewConstMetric(RtimeDesc,
 					prometheus.GaugeValue, value, status.Status["Model Name"])
+			}
+		} else if k == "Output Voltage" {
+			value_arr := strings.Fields(v)
+			if value, err := strconv.ParseFloat(value_arr[0], 64); err == nil {
+				ch <- prometheus.MustNewConstMetric(OutVoltageDesc,
+					prometheus.GaugeValue, value, status.Status["Model Name"])
+			}
+		} else if k == "Test Result" {
+			value_arr := strings.Fields(v)
+			if value_arr[0] == "Passed" {
+				ch <- prometheus.MustNewConstMetric(TestDesc,
+					prometheus.GaugeValue, 1, status.Status["Model Name"])
+			} else {
+				ch <- prometheus.MustNewConstMetric(TestDesc,
+					prometheus.GaugeValue, 0, status.Status["Model Name"])
 			}
 		}
 	}
