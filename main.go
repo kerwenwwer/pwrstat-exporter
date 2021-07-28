@@ -37,6 +37,12 @@ var (
 		[]string{"device"},
 		nil)
 
+	InVoltageDesc = prometheus.NewDesc(
+		"ups_in_voltage",
+		"UPS Input Voltage(V): pass-> 1 non_pass -> 0",
+		[]string{"device"},
+		nil)
+
 	OutVoltageDesc = prometheus.NewDesc(
 		"ups_out_voltage",
 		"UPS Output Voltage(V): pass-> 1 non_pass -> 0",
@@ -97,6 +103,12 @@ func (l *PwrstatCollector) Collect(ch chan<- prometheus.Metric) {
 			value_arr := strings.Fields(v)
 			if value, err := strconv.ParseFloat(value_arr[0], 64); err == nil {
 				ch <- prometheus.MustNewConstMetric(RtimeDesc,
+					prometheus.GaugeValue, value, status.Status["Model Name"])
+			}
+		} else if k == "Utility Voltage" {
+			value_arr := strings.Fields(v)
+			if value, err := strconv.ParseFloat(value_arr[0], 64); err == nil {
+				ch <- prometheus.MustNewConstMetric(InVoltageDesc,
 					prometheus.GaugeValue, value, status.Status["Model Name"])
 			}
 		} else if k == "Output Voltage" {
