@@ -25,4 +25,6 @@ Args
 sudo pwrstat-exporter --web.listen-address 8088 --web.telemetry-path /metrics
 ```
 
+## Dashboard
+You can import the dashboard using ``grafana-dashboard.json``
 ![grafana](/image/grafana.png)
