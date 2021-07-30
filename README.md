@@ -10,10 +10,9 @@ And make sure the ``pwrstat.service`` has been staring.
 
 Install dep.
 ```bash
-sudo apt install -y libsensors4-dev
-git clone https://github.com/kerwenwwer/sensor-exporter.git
-cd sensor-exporter/sensor-exporter
-go build && mv sensor-exporter /usr/loca/bin/
+git clone https://github.com/kerwenwwer/pwrstat-exporter.git
+cd pwrstat-exporter
+go build && mv pwrstat-exporter /usr/loca/bin/
 ```
 
 ## Usage
@@ -25,3 +24,5 @@ Args
 ```bash
 sudo pwrstat-exporter --web.listen-address 8088 --web.telemetry-path /metrics
 ```
+
+![grafana](/image/grafana.png)
