@@ -12,7 +12,7 @@ Install dep.
 ```bash
 git clone https://github.com/kerwenwwer/pwrstat-exporter.git
 cd pwrstat-exporter
-go build && mv pwrstat-exporter /usr/loca/bin/
+go build && mv pwrstat-exporter /usr/local/bin/
 ```
 
 ## Usage
