@@ -3,8 +3,10 @@ package gopwrstat
 import (
 	"encoding/json"
 	"errors"
+	"fmt"
 	"io/ioutil"
 	"os/exec"
+	"os/user"
 	"strings"
 )
 
@@ -41,7 +43,19 @@ func construct(content string) *Pwrstat {
 
 // A successful call returns err == nil.
 func NewFromSystem() (*Pwrstat, error) {
-	out, err := exec.Command("sudo", "pwrstat", "-status").Output()
+	currentUser, err := user.Current()
+	if err != nil {
+		return &Pwrstat{}, fmt.Errorf("unable to get current user: %v", err)
+	}
+
+	var cmd *exec.Cmd
+	if currentUser.Username == "root" {
+		cmd = exec.Command("pwrstat", "-status")
+	} else {
+		cmd = exec.Command("sudo", "pwrstat", "-status")
+	}
+
+	out, err := cmd.Output()
 	if err != nil {
 		return &Pwrstat{}, errors.New("pwrstat missing")
 	}
