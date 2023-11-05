@@ -41,7 +41,7 @@ func construct(content string) *Pwrstat {
 
 // A successful call returns err == nil.
 func NewFromSystem() (*Pwrstat, error) {
-	out, err := exec.Command("sudo", "pwrstat", "-status").Output()
+	out, err := exec.Command("pwrstat", "-status").Output()
 	if err != nil {
 		return &Pwrstat{}, errors.New("pwrstat missing")
 	}

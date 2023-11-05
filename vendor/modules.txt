@@ -10,7 +10,7 @@ github.com/golang/protobuf/ptypes/duration
 github.com/golang/protobuf/ptypes/timestamp
 # github.com/joho/godotenv v1.3.0
 ## explicit
-# github.com/kerwenwwer/gopwrstat v0.0.0-20210706060147-0e38c9444aac
+# github.com/kerwenwwer/gopwrstat v0.0.0-20210706082034-1280720e1b75
 ## explicit
 github.com/kerwenwwer/gopwrstat
 # github.com/matttproud/golang_protobuf_extensions v1.0.1
