@@ -1,0 +1,15 @@
+version: '2.1'
+services:
+  pwrstat_exporter:
+    container_name: pwrstat-exporter
+    restart: unless-stopped
+    build:
+      context: /root/documents/go-docker-demo
+      dockerfile: Dockerfile
+    image: pwrstat-exporter
+    devices:
+      - /dev/bus/usb:/dev/bus/usb 
+      - /dev/usb/hiddev0:/dev/usb/hiddev0
+    privileged: true
+    ports:
+      - 8088:8088
