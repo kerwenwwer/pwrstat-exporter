@@ -3,9 +3,7 @@ services:
   pwrstat_exporter:
     container_name: pwrstat-exporter
     restart: unless-stopped
-    build:
-      context: /root/documents/pwrstat-exporter
-      dockerfile: Dockerfile
+    build: .
     image: pwrstat-exporter
     devices:
       - /dev/bus/usb:/dev/bus/usb 
