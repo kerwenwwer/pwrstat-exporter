@@ -4,7 +4,7 @@ services:
     container_name: pwrstat-exporter
     restart: unless-stopped
     build:
-      context: /root/documents/go-docker-demo
+      context: /root/documents/pwrstat-exporter
       dockerfile: Dockerfile
     image: pwrstat-exporter
     devices:
