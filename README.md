@@ -1,16 +1,15 @@
-# Pwrstat exporter
-Cyberpower UPS Linux daemon (pwrstat) exporter for prometheus 
+# Pwrstat Exporter
+A Prometheus exporter for CyberPower UPS Linux daemon (pwrstat).
 
-## Deploy
+## Overview
+The Pwrstat Exporter enables Prometheus to monitor data from CyberPower Uninterruptible Power Supply (UPS) systems running on Linux. It uses the pwrstat Linux daemon for data acquisition.
 
-### Docker
-
-#### Prerequisites
-- Docker
-
-#### Installation
-
-To install pwrstat exporter using Docker, simply run the following command.
+# Deployment
+## Docker Deployment
+Prerequisites
+Docker installed on your system.
+### Installation
+Run the following command to install the Pwrstat Exporter using Docker:
 
 ```bash
 docker run \
@@ -23,33 +22,34 @@ docker run \
   -d cardif99/pwrstat-exporter:latest
 ```
 
-or you can check the [docker-compose.yaml](https://github.com/kerwenwwer/pwrstat-exporter/blob/main/docker-compose.yaml) file
+Alternatively, refer to the provided [docker-compose.yaml](https://github.com/kerwenwwer/pwrstat-exporter/blob/main/docker-compose.yaml) for a Docker Compose setup.
 
-### Build from source
+## Building from Source
+Prerequisites
+* Golang version 1.16 or higher.
+### Installation
+Clone the repository and build the executable:
 
-#### Prerequisites
-- Golang 1.16
-
-#### Installation
 ```bash
 git clone https://github.com/kerwenwwer/pwrstat-exporter.git
 cd pwrstat-exporter
 go build && mv pwrstat-exporter /usr/local/bin/
 ```
 
-#### Usage
-Since that ``pwrstat`` require sudo permission so:
+### Usage
+The ``pwrstat`` command requires sudo privileges:
+
 ```bash
 sudo pwrstat-exporter 
 ```
-or with arguments
+To specify arguments:
 ```bash
 sudo pwrstat-exporter --web.listen-address 8088 --web.telemetry-path /metrics
 ```
 
-#### Systemd service
-Create the service config
-`/etc/systemd/system/pwrstat-exporter.service`
+## Systemd Service Integration
+Configuration
+Create a systemd service configuration file at `/etc/systemd/system/pwrstat-exporter.service`:
 
 ```
 [Unit]
@@ -62,19 +62,15 @@ ExecStart=/usr/local/bin/pwrstat-exporter
 [Install]
 WantedBy=multi-user.target
 ```
-Restart the systemd daemon, set the service to start on boot, and start the service manually for the first time. 
+
+Reload the systemd daemon, enable the service at startup, and start the service:
 
 ```bash
 sudo systemctl daemon-reload
-```
-```bash
 sudo systemctl enable pwrstat-exporter
-```
-```bash
 sudo service pwrstat-exporter start
 ```
 
-## Grafana dashboard
-You can import the dashboard using the [grafana-dashboard.json](https://github.com/kerwenwwer/pwrstat-exporter/blob/main/grafana-dashboard.json)
-
+## Grafana Integration
+A custom Grafana dashboard is available for visualizing the data. Import the dashboard using the [grafana-dashboard.json](https://github.com/kerwenwwer/pwrstat-exporter/blob/main/grafana-dashboard.json) file.
 ![grafana](/image/grafana.png)
