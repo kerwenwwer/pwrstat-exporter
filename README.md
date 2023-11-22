@@ -4,7 +4,7 @@ A Prometheus exporter for CyberPower UPS Linux daemon (pwrstat).
 ## Overview
 The Pwrstat Exporter enables Prometheus to monitor data from CyberPower Uninterruptible Power Supply (UPS) systems running on Linux. It uses the pwrstat Linux daemon for data acquisition.
 
-# Deployment
+## Deployment
 ## Docker Deployment
 Prerequisites
 Docker installed on your system.
