@@ -1,0 +1,12 @@
+version: '2.1'
+services:
+  pwrstat_exporter:
+    image: cardif99/pwrstat-exporter:latest
+    container_name: pwrstat-exporter
+    devices:
+      - /dev/bus/usb:/dev/bus/usb 
+      - /dev/usb/hiddev0:/dev/usb/hiddev0
+    privileged: true
+    restart: unless-stopped
+    ports:
+      - 8088:8088

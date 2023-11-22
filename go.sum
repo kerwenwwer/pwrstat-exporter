@@ -47,6 +47,8 @@ github.com/julienschmidt/httprouter v1.2.0/go.mod h1:SYymIcj16QtmaHHD7aYtjjsJG7V
 github.com/julienschmidt/httprouter v1.3.0/go.mod h1:JR6WtHb+2LUe8TCKY3cZOxFyyO8IZAc4RVcycCCAKdM=
 github.com/kerwenwwer/gopwrstat v0.0.0-20210706060147-0e38c9444aac h1:B4ymW8RQUi+91lJ3LPlS2u72o8dSnhEkUxWVwgJw3r8=
 github.com/kerwenwwer/gopwrstat v0.0.0-20210706060147-0e38c9444aac/go.mod h1:7nTeDm/0jQjQ853x2uBGMRnrS0EfjT8RrR2sQHLhemA=
+github.com/kerwenwwer/gopwrstat v0.0.0-20210706082034-1280720e1b75 h1:jC6l5TqFyc0PKXIDEV+8eAEQdu93rN3zwQgvzAtrDCQ=
+github.com/kerwenwwer/gopwrstat v0.0.0-20210706082034-1280720e1b75/go.mod h1:7nTeDm/0jQjQ853x2uBGMRnrS0EfjT8RrR2sQHLhemA=
 github.com/konsorten/go-windows-terminal-sequences v1.0.1/go.mod h1:T0+1ngSBFLxvqU3pZ+m/2kptfBszLMUkC4ZK/EgS/cQ=
 github.com/konsorten/go-windows-terminal-sequences v1.0.3/go.mod h1:T0+1ngSBFLxvqU3pZ+m/2kptfBszLMUkC4ZK/EgS/cQ=
 github.com/kr/logfmt v0.0.0-20140226030751-b84e30acd515/go.mod h1:+0opPa2QZZtGFBFZlji/RkVcI2GknAs/DXo4wKdlNEc=
