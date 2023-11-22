@@ -36,7 +36,7 @@ cd pwrstat-exporter
 go build && mv pwrstat-exporter /usr/local/bin/
 ```
 
-### Usage
+## Usage
 The ``pwrstat`` command requires sudo privileges:
 
 ```bash
