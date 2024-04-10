@@ -1,5 +1,8 @@
+# Define variables for repeated values
+DOCKER_TAG := kerwenwwer/pwrstat-exporter:latest
+
 # Phony targets for workflows
-.PHONY: all bpf-objects build docker-build docker-push
+.PHONY: all build docker-build docker-push
 
 # Default target to compile the application and build the Docker image
 all: build docker-build
