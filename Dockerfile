@@ -15,7 +15,7 @@ RUN apt update && \
 COPY bin/pwrstat-exporter /app/pwrstat-exporter
 
 # Copy the init script into the image and make it executable.
-COPY init.sh /app
+COPY scripts/init.sh /app
 RUN chmod +x /app/init.sh
 
 # Specify the container's entrypoint.
