@@ -1,35 +1,51 @@
-name: Go
+name: Go Build and Test, and Docker Build and Push
 
 on:
   push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+    branches:
+      - main
+    tags:
+      - 'v*'
 
 jobs:
-
-  build:
+  go-build-and-test:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+      - name: Check out the repo
+        uses: actions/checkout@v3
 
-    - name: Set up Go
-      uses: actions/setup-go@v2
-      with:
-        go-version: 1.21
+      - name: Set up Go
+        uses: actions/setup-go@v3
+        with:
+          go-version: '1.21'  # or any other Go version
 
-    - name: Build
-      run: go build -v ./...
+      - name: Build
+        run: go build ./...
 
-  test:
+      - name: Test
+        run: go test ./...
+
+  docker-build-and-push:
+    if: startsWith(github.ref, 'refs/tags/v')
     runs-on: ubuntu-latest
+    needs: go-build-and-test
     steps:
-    - uses: actions/checkout@v2
+      - name: Check out the repo
+        uses: actions/checkout@v3
 
-    - name: Set up Go
-      uses: actions/setup-go@v2
-      with:
-        go-version: 1.21
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
 
-    - name: Test
-      run: go test -v ./...
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: kerwenwwer/pwrstat-exporter:latest,kerwenwwer/pwrstat-exporter:${{ github.ref_name }}
