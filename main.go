@@ -15,6 +15,7 @@ import (
 var (
 	listenAddress = flag.String("web.listen-address", ":8088", "Address on which to expose metrics and web interface.")
 	metricsPath   = flag.String("web.telemetry-path", "/metrics", "Path under which to expose metrics.")
+	
 	// Metric Descriptors
 	LoadDesc = prometheus.NewDesc(
 		"ups_load",
