@@ -1,5 +1,5 @@
 # Define variables for repeated values
-DOCKER_TAG := kerwenwwer/pwrstat-exporter:latest
+DOCKER_TAG := pwrstat-exporter:latest
 
 # Phony targets for workflows
 .PHONY: all build docker-build docker-push
