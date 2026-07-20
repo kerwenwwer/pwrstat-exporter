@@ -149,7 +149,7 @@ func collectStateMetric(value, model string, ch chan<- prometheus.Metric) {
 
 func collectTestResultMetric(value, model string, ch chan<- prometheus.Metric) {
 	result := 0.0
-	if value == "Passed" {
+	if strings.HasPrefix(value, "Passed") {
 		result = 1.0
 	}
 	ch <- prometheus.MustNewConstMetric(TestDesc, prometheus.GaugeValue, result, model)
